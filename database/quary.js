@@ -1,4 +1,4 @@
 exports.quaryList={
-    GET_STORE_LIST_QUARY:"SELECT STORE_ID, STORE_NAME, STORE_ADDRESS, STORE_CODE, FROM BMS.STORE",
-    SAVE_STORE_QUARY:"INSERT INTO BMS.STORE (STORE_NAME, STORE_ADDRESS, STORE_CODE, CREATED_ON, CREATED_BY) VALUES(? ,? ,?, ?, ?)"
+    GET_STORE_LIST_QUARY:"SELECT store_id, store_name, store_address, store_code, created_on, created_by FROM bms.store;",
+    SAVE_STORE_QUARY:"INSERT INTO bms.store (store_name, store_address, store_code, created_on, created_by) VALUES($1, $2, $3, $4, $5);"
 }

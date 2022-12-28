@@ -9,7 +9,7 @@ exports.getStoreList = async (req, res) => {
     try {
         var storeQuary = quaries.quaryList.GET_STORE_LIST_QUARY
         var result = await dbConnection.dbQuery(storeQuary)
-        return res.status(200).send(JSON.stringify({ status: 200, message: "success get all data from store", data: result }))
+        return res.status(200).send(JSON.stringify({ status: 200, message: "success get all data from store", data: result.rows }))
 
     } catch (error) {
         console.log(error)
@@ -33,13 +33,14 @@ exports.addStore = async (req, res) => {
         }
         let storeCode = randomstring.generateStoreCode()
         values=[storeName,storeAddress,storeCode,createdOn,createdBy]
-        var addStoreQuary = quaries.quaryList.addStore
-         await dbConnection.dbQuery(addStoreQuary)
+        var addStoreQuary = quaries.quaryList.SAVE_STORE_QUARY
+         await dbConnection.dbQuery(addStoreQuary ,values)
         return res.status(200).send(JSON.stringify({ status: 200, message: "success to add store" }))
 
 
 
     } catch (error) {
+        console.log(error)
         return res.status(422).send({ status: 422, message: "faild to add store" })
 
     }

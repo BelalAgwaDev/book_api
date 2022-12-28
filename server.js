@@ -2,7 +2,7 @@
 var express = require('express')
 var bodyParser = require('body-parser')
 var cors=require("cors")
-//const noteRouter = require('./route/noteRoute')
+const storeRouter = require('./route/store.route')
 const app=express()
 const port=3000
 
@@ -20,7 +20,7 @@ const port=3000
 
 
 // // use note route
-// app.use("/api/v1",noteRouter)
+ app.use("/api",storeRouter)
 
 
 
