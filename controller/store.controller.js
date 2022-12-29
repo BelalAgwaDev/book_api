@@ -13,9 +13,11 @@ exports.getStoreList = async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        return res.status(422).send({ status: 422, message: "faild to list store" })
+        return res.status(500).send({ status: 500, message: "faild to list store database" })
 
     }
+
+    
 }
 
 
@@ -41,7 +43,76 @@ exports.addStore = async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        return res.status(422).send({ status: 422, message: "faild to add store" })
+        return res.status(500).send({ status: 500, message: "faild to add store database" })
+
+    }
+
+
+
+
+}
+
+
+
+
+
+
+exports.updateStore = async (req, res) => {
+    try {
+        var createdBy = "admin"
+        var createdOn = new Date();
+        var storeName = req.body.storeName
+        var storeAddress = req.body.storeAddress
+        var storeId = req.body.storeId
+        var storeCode = req.body.storeCode
+
+        if (!storeName || !storeAddress||!storeId ||!storeCode) {
+            return res.status(422).send({ status: 422, message: "store name ,id,and address are require " })
+
+        }
+        values=[storeName,storeAddress,storeCode,createdOn,createdBy,storeId]
+        var updateStoreQuary = quaries.quaryList.UPDATE_STORE_QUARY
+         await dbConnection.dbQuery(updateStoreQuary ,values)
+        return res.status(200).send(JSON.stringify({ status: 200, message: "success to update store" }))
+
+
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({ status: 500, message: "faild to add store database" })
+
+    }
+
+
+
+
+}
+
+
+
+
+
+
+exports.deleteStore = async (req, res) => {
+    try {
+    
+        var storeId = req.params.storeId
+
+
+        if (!storeId) {
+            return res.status(422).send({ status: 422, message: "store id are require " })
+
+        }
+        
+        var updateStoreQuary = quaries.quaryList.DELETE_STORE_QUARY
+         await dbConnection.dbQuery(updateStoreQuary ,[storeId])
+        return res.status(200).send(JSON.stringify({ status: 200, message: "success to delete store" }))
+
+
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({ status: 500, message: "faild to delete store database" })
 
     }
 

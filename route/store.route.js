@@ -7,7 +7,9 @@ route.get("/store",StoreController.getStoreList)
 
 route.post("/store",StoreController.addStore)
 
+route.delete("/store/:storeId",StoreController.deleteStore)
 
+route.put("/store",StoreController.updateStore)
 
 
 

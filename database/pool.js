@@ -4,11 +4,11 @@ const dotenv = require("dotenv").config()
 
 
 const database_Config = {
-  host: 'localhost',
-  user: 'postgres',
-  database: "postgres",
-  password: "2468100",
-  port: 5432,
+  host: process.env.host,
+  user: process.env.user,
+  database: process.env.database,
+  password: process.env.password,
+  port: process.env.port,
   connectionTimeoutMillis: 300,
   idleTimeoutMillis: 200,
   max: 20,
@@ -26,13 +26,13 @@ const pool = new Pool(
 
 
 pool.on('connect', (client) => {
-  console.log("is connect")
+  console.log("datatbase is connect")
 })
 
 
 
 pool.on('remove', (client) => {
-  console.log("remove")
+  console.log("data base is remove")
 })
 
 
